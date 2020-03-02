@@ -1,0 +1,200 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+
+public class TimeManagement implements ActionListener {
+	
+	private JFrame frame; 
+	private JTabbedPane tabbed; 
+	private JPanel panel; 
+	private JPanel page1, page2, page3; 
+	private JLabel nameLabel, gradeLabel, msgLabel, msgLabel2, msgLabel3; 
+	private JTextField nam, grad, subject1, subject2, subject3, subject4, subject5, subject6, subject7; 
+	private String name; 
+	private String grade; 
+	private JButton nextButton1, nextButton2; 
+	
+	private Subject subj1, subj2, subj3, subj4, subj5, subj6, subj7; 
+	
+	
+	
+	public TimeManagement() {
+		
+		frame = new JFrame(); 
+		frame.setBounds(500, 500, 400, 400);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		panel = new JPanel(); 
+		panel.setBounds(0, 0, 400, 400);
+		panel.setLayout(new BorderLayout());
+		panel.setBackground(Color.WHITE); 
+		frame.add(panel); 
+		
+		tabbed = new JTabbedPane(); 
+		tabbed.setBackground(Color.WHITE); 
+		panel.add(tabbed); 
+		
+		logInPage();
+		
+		frame.setVisible(true);
+		
+	}
+	
+	
+	private void logInPage() {
+		page1 = new JPanel(); 
+		page1.setBackground(Color.PINK);
+		
+		nameLabel = new JLabel("Enter your first and last name in this box and click enter"); 
+		gradeLabel = new JLabel("Enter your grade level in this box and click enter"); 
+		msgLabel = new JLabel("Click on the next tab when you are done"); 
+		
+		nextButton1 = new JButton("next"); 
+		nextButton1.addActionListener(this); 
+		
+		page1.setLayout(new GridLayout(6, 1));
+		nam = new JTextField();  
+		nam.addActionListener(this);
+		grad = new JTextField(); 
+		grad.addActionListener(this);
+		page1.add(nameLabel); 
+		page1.add(nam);
+		page1.add(gradeLabel); 
+		page1.add(grad); 
+		page1.add(msgLabel);
+		page1.add(nextButton1); 
+		tabbed.addTab("Log In", page1);
+	}
+	
+	private void secondPage() {
+		page2 = new JPanel(); 
+		page2.setBackground(Color.PINK); 
+		page2.setLayout(new GridLayout(10, 1));
+		
+		msgLabel2 = new JLabel("Enter courses. Add AP/Ho (honors) as needed."); 
+		msgLabel3 = new JLabel("For each subject, add difficulty level from 1-3 (easy to hard)"); 
+		
+		nextButton2 = new JButton("next"); 
+		nextButton2.addActionListener(this); 
+		
+		subject1 = new JTextField(); 
+		subject1.addActionListener(this);
+		subject2 = new JTextField(); 
+		subject2.addActionListener(this);
+		subject3 = new JTextField(); 
+		subject3.addActionListener(this);
+		subject4 = new JTextField(); 
+		subject4.addActionListener(this);
+		subject5 = new JTextField(); 
+		subject5.addActionListener(this);
+		subject6 = new JTextField(); 
+		subject6.addActionListener(this);
+		subject7 = new JTextField(); 
+		subject7.addActionListener(this);
+		
+		page2.add(msgLabel2);
+		page2.add(msgLabel3); 
+		page2.add(subject1); 
+		page2.add(subject2); 
+		page2.add(subject3); 
+		page2.add(subject4); 
+		page2.add(subject5); 
+		page2.add(subject6); 
+		page2.add(subject7); 
+		page2.add(nextButton2); 
+		
+		
+		tabbed.addTab("Schedule", page2); 
+	}
+	
+	
+	private void thirdPage() {
+		
+		page3 = new JPanel(); 
+		page3.setBackground(Color.PINK); 
+		page3.setLayout(new GridLayout(8, 1));
+		
+		msgLabel3 = new JLabel("Hello " + name + ", Grade " + grade + ". This is your schedule."); 
+		
+		page3.add(msgLabel3); 
+		
+		
+		if(subj1!=null) page3.add(new JLabel("Time for " + subj1.getSubject() + ":" + " " + subj1.calculateTime()));
+		if(subj2!=null) page3.add(new JLabel("Time for " + subj2.getSubject() + ":" + " " + subj2.calculateTime()));
+		if(subj3!=null) page3.add(new JLabel("Time for " + subj3.getSubject() + ":" + " " + subj3.calculateTime()));
+		if(subj4!=null) page3.add(new JLabel("Time for " + subj4.getSubject() + ":" + " " + subj4.calculateTime()));
+		if(subj5!=null) page3.add(new JLabel("Time for " + subj5.getSubject() + ":" + " " + subj5.calculateTime()));
+		if(subj6!=null) page3.add(new JLabel("Time for " + subj6.getSubject() + ":" + " " + subj6.calculateTime()));
+		if(subj7!=null) page3.add(new JLabel("Time for " + subj7.getSubject() + ":" + " " + subj7.calculateTime()));
+
+		tabbed.addTab("Total time schedule", page3); 
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==nam) {
+			System.out.println("entered"); 
+			name = nam.getText(); 
+			System.out.println(name);
+		}
+		
+		else if(e.getSource()==grad) {
+			System.out.println("entered"); 
+			grade = grad.getText(); 
+			System.out.println(grade); 
+		}
+		
+		else if(e.getSource()==subject1) {
+			subj1 = new Subject(subject1.getText()); 
+		}
+		
+		else if(e.getSource()==subject2) {
+			subj2 = new Subject(subject2.getText()); 
+		}
+		
+		else if(e.getSource()==subject3) {
+			subj3 = new Subject(subject3.getText()); 
+		}
+		
+		else if(e.getSource()==subject4) {
+			subj4 = new Subject(subject4.getText()); 
+		}
+		
+		else if(e.getSource()==subject5) {
+			subj5 = new Subject(subject5.getText()); 
+		}
+		
+		else if(e.getSource()==subject6) {
+			subj6 = new Subject(subject6.getText()); 
+		}
+		
+		else if(e.getSource()==subject7) {
+			subj7 = new Subject(subject7.getText()); 
+		}
+		
+		else if(e.getSource()==nextButton1) {
+			secondPage(); 
+		}
+		
+		else if(e.getSource()==nextButton2) {
+			thirdPage(); 
+		}
+ 		
+	}
+	
+	public static void main(String[] args)  {
+		new TimeManagement(); 
+	}
+	
+	
+}
