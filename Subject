@@ -1,0 +1,62 @@
+public class Subject {
+	
+	private String subject; 
+	
+	public Subject(String subject) {
+		this.subject = subject; 
+	}
+	
+	public String getSubject() {
+		int index = subject.indexOf("1"); 
+		if(index>=0) {
+			return subject.substring(0, index); 
+		}
+		
+		index = subject.indexOf("2"); 
+		
+		if(index>=0) {
+			return subject.substring(0, index); 
+		}
+		
+		index = subject.indexOf("3"); 
+		
+		if(index>=0) {
+			return subject.substring(0, index); 
+		}
+		
+		return subject; 
+	}
+
+	private boolean isAP() {
+		return subject.indexOf("AP")>=0; 
+	}
+	
+	private boolean isHonors() {
+		return subject.indexOf("Ho")>=0; 
+	}
+	
+
+	public String calculateTime() {
+		if(isAP()) {		
+			if(subject.indexOf("3")>=0) return "2 hrs"; 
+			else if(subject.indexOf("2")>=0) return "1 hr 45 min"; 
+			return "1 hr 30 min"; 
+		}
+		
+		else if(isHonors()) {
+			if(subject.indexOf("3")>=0) return "1 hr 15 min"; 
+			else if(subject.indexOf("2")>=0) return "1 hr"; 
+			return "50 min"; 
+		}
+		
+		else {
+			if(subject.indexOf("3")>=0) return "45 min"; 
+			else if(subject.indexOf("2")>=0) return "30 min"; 
+			return "25 min"; 
+		}
+
+	}
+
+}
+
+
